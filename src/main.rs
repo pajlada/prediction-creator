@@ -154,7 +154,7 @@ async fn main() -> anyhow::Result<()> {
             broadcaster_user_id,
             app.title
         )?;
-        
+
         start_prediction(
             &client,
             &token,
