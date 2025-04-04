@@ -11,6 +11,6 @@ anyhow = "1.0.97"
 clap = { version = "4.5.35", features = ["derive"] }
 console = "0.15.11"
 dialoguer = "0.11.0"
-reqwest = "0.12.14"
+reqwest = "0.12.15"
 tokio = { version = "1.44.1", features = ["full"] }
 twitch_api = { version = "0.7.2", features = ["reqwest", "helix", "tracing"] }
