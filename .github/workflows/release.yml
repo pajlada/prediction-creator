@@ -19,7 +19,7 @@ jobs:
           - target: x86_64-apple-darwin
             archive: zip
     steps:
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
       - name: Compile and release
         uses: rust-build/rust-build.action@v1.4.5
         env:
