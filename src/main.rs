@@ -5,7 +5,6 @@ use clap::Parser;
 use console::Term;
 use dialoguer::theme::ColorfulTheme;
 use dialoguer::Select;
-use twitch_api::helix::predictions::end_prediction::EndPrediction;
 use twitch_api::helix::predictions::{
     create_prediction, end_prediction, get_predictions, Prediction,
 };
@@ -72,7 +71,7 @@ async fn end_prediction<'a>(
     prediction_id: &'a PredictionIdRef,
     new_status: PredictionStatus,
     winning_outcome_id: Option<String>,
-) -> anyhow::Result<end_prediction::EndPrediction> {
+) -> anyhow::Result<Prediction> {
     let request = end_prediction::EndPredictionRequest::new();
     let mut body = end_prediction::EndPredictionBody::new(channel_id, prediction_id, new_status);
     if let Some(winning_outcome_id) = winning_outcome_id {
@@ -205,19 +204,7 @@ async fn main() -> anyhow::Result<()> {
         .await?
     };
 
-    match response {
-        EndPrediction::Success(ref _success) => {
-            // TODO: Print successful outcome
-            writeln!(term, "Successfully ended prediction")?;
-        }
-        EndPrediction::MissingQuery => {
-            writeln!(term, "ERROR: Bad prediction body: {:?}", response)?;
-        }
-        EndPrediction::AuthFailed => {
-            writeln!(term, "ERROR: Auth failed: {:?}", response)?;
-        }
-        unknown => unimplemented!("Unimplemented end_prediction response {unknown:?}"),
-    }
+    writeln!(term, "Successfully ended prediction")?;
 
     Ok(())
 }
